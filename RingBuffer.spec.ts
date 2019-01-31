@@ -6,7 +6,7 @@ import { RingBuffer } from './RingBuffer';
 let buffer: RingBuffer<number>;
 
 describe('RingBuffer', () => {
-  
+
   beforeEach(() => {
     buffer = new RingBuffer<number>(4);
   });
@@ -42,11 +42,11 @@ describe('RingBuffer', () => {
     expect(buffer.remove()).to.equal(4711);
   });
 
-  it('it should throw an error if remove() is called on an empty ringBuffer', ()=>{
-    expect(()=>{buffer.remove()}).to.throw('Cannot remove from empty Ringbuffer');
+  it('it should throw an error if remove() is called on an empty ringBuffer', () => {
+    expect(() => { buffer.remove() }).to.throw('Cannot remove from empty Ringbuffer');
   });
-  
-  it('it should return the "oldest" element when reading', ()=>{
+
+  it('it should return the "oldest" element when reading', () => {
     buffer.add(4);
     buffer.add(7);
     buffer.add(9);
@@ -60,17 +60,17 @@ describe('RingBuffer', () => {
 
     expect(buffer.remove()).to.equal(9);
     expect(buffer.remove()).to.equal(4);
-    
-    expect(buffer.size()).to.equal(2);   
+
+    expect(buffer.size()).to.equal(2);
   });
 
-  it('it should overwrite the oldest element when the ring is full',() => {
+  it('it should overwrite the oldest element when the ring is full', () => {
     buffer.add(4);
     buffer.add(7);
     buffer.add(9);
     buffer.add(4711);
     buffer.add(99);
-    
+
     expect(buffer.remove()).to.equal(7);
     expect(buffer.remove()).to.equal(9);
     expect(buffer.remove()).to.equal(4711);
@@ -78,7 +78,7 @@ describe('RingBuffer', () => {
     expect(buffer.size()).to.equal(0);
   });
 
-  it('multiple roundtrips should work', ()=>{
+  it('multiple roundtrips should work', () => {
     for (let index = 0; index < 100; index++) {
       buffer.add(index);
     }
@@ -88,6 +88,6 @@ describe('RingBuffer', () => {
     expect(buffer.remove()).to.equal(98);
     expect(buffer.remove()).to.equal(99);
   });
-  
+
 
 });
